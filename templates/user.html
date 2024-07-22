@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Evaluation</title>
+</head>
+<body>
+    <h1>User Evaluation for {{ user['username'] }}</h1>
+    <p><strong>Paragraph:</strong> {{ user['paragraph'] }}</p>
+    <p><strong>Evaluation:</strong> {{ user['evaluation'] }}</p>
+    <h2>Data Frame:</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Sentence</th>
+                {% for column in user['data_frame']['0'].keys() %}
+                    <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in user['data_frame'].items() %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    {% for value in row.values() %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

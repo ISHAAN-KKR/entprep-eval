@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrepreneurship Skills Evaluation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <section class="bg-white">
+        <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
+          <aside class="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
+            <img
+              alt=""
+              src="./lernphoto.jpeg"
+              class="absolute inset-0 h-full w-full object-cover"
+            />
+          </aside>
+      
+          <main
+            class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+          >
+            <div class="max-w-xl lg:max-w-3xl">
+      
+              <h1 class="my-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl ">
+               Problem Statement
+              </h1>
+      
+              <p class="my-4 leading-relaxed text-gray-500">
+                Write exactly 10 sentence on how to scale up a shop business near a engineering college.
+              </p>
+              <div class="Form">
+                  <form id="evaluation-form" class="border-gray-400">
+                    <label class="label" for="username">Username:</label>
+                    <input class="mx-3 p-3 rounded-lg bg-gray-50 border-gray-900 border mb-3" type="text" id="username" name="username" placeholder="Enter your name" required /><br />
+            
+                    <label for="paragraph">Paragraph:</label>
+                    <textarea
+                    class="mx-3 p-3 rounded-lg bg-gray-50 border-gray-900 border mb-3"
+                      id="paragraph"
+                      placeholder="Write 10 lines..."
+                      name="paragraph"
+                      rows="10"
+                      cols="50"
+                      required
+                    ></textarea><br />
+            
+                    <button class="bg-emerald-600 text-gray-50 px-4 mt-4 py-2 rounded-lg mx-auto hover:bg-emerald-200 hover:text-gray-800" type="submit">Submit</button>
+                  </form>
+              </div>
+              <p id="result"></p>
+            </div>
+          </main>
+        </div>
+      </section>
+
+    <script>
+        document.getElementById('evaluation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            
+            fetch('/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('result').innerText = 'Error: ' + data.error;
+                } else {
+                    document.getElementById('result').innerText = 'Evaluation: ' + data.evaluation;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
